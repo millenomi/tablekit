@@ -15,6 +15,8 @@
 
 - (void) dealloc
 {
+	self.dataSource = nil;
+	
 	[contents release];
 	[bindings release];
 	[super dealloc];
