@@ -136,9 +136,16 @@ static void* ILKVOTableDataSource_ModelObjectContext = &ILKVOTableDataSourceUniq
 	}
 	
 	if (!self.isOneShot) {
+		NSMutableArray* a = [self.boundObject mutableArrayValueForKey:self.keyPath];
+		
 		for (NSString* key in self.bindings) {
-			NSMutableArray* a = [self.boundObject mutableArrayValueForKey:self.keyPath];
 			[a addObserver:self toObjectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, [a count])] forKeyPath:[self.bindings objectForKey:key] options:0 context:ILKVOTableDataSource_ModelObjectContext];
+		}
+		
+		NSInteger i = 0;
+		for (id o in a) {
+			[self addIndex:i forObject:o];
+			i++;
 		}
 	}
 	

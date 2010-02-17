@@ -14,6 +14,8 @@
 		15144D4F112C5A2000B44AA5 /* OneShotMutableTablePane.m in Sources */ = {isa = PBXBuildFile; fileRef = 15144D4E112C5A2000B44AA5 /* OneShotMutableTablePane.m */; };
 		15144D8A112C5CAE00B44AA5 /* OneShotMutableReloadTablePane.m in Sources */ = {isa = PBXBuildFile; fileRef = 15144D89112C5CAE00B44AA5 /* OneShotMutableReloadTablePane.m */; };
 		15144DD6112C64F800B44AA5 /* OneShotEditableReloadTablePane.m in Sources */ = {isa = PBXBuildFile; fileRef = 15144DD5112C64F800B44AA5 /* OneShotEditableReloadTablePane.m */; };
+		15144DF5112C66E200B44AA5 /* ReloadOnChangeTablePane.m in Sources */ = {isa = PBXBuildFile; fileRef = 15144DF4112C66E200B44AA5 /* ReloadOnChangeTablePane.m */; };
+		15144DF8112C670D00B44AA5 /* ValuedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 15144DF7112C670D00B44AA5 /* ValuedObject.m */; };
 		1D3623260D0F684500981E51 /* TableKitAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* TableKitAppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
@@ -37,6 +39,10 @@
 		15144D89112C5CAE00B44AA5 /* OneShotMutableReloadTablePane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OneShotMutableReloadTablePane.m; sourceTree = "<group>"; };
 		15144DD4112C64F800B44AA5 /* OneShotEditableReloadTablePane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OneShotEditableReloadTablePane.h; sourceTree = "<group>"; };
 		15144DD5112C64F800B44AA5 /* OneShotEditableReloadTablePane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OneShotEditableReloadTablePane.m; sourceTree = "<group>"; };
+		15144DF3112C66E200B44AA5 /* ReloadOnChangeTablePane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReloadOnChangeTablePane.h; sourceTree = "<group>"; };
+		15144DF4112C66E200B44AA5 /* ReloadOnChangeTablePane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReloadOnChangeTablePane.m; sourceTree = "<group>"; };
+		15144DF6112C670D00B44AA5 /* ValuedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValuedObject.h; sourceTree = "<group>"; };
+		15144DF7112C670D00B44AA5 /* ValuedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ValuedObject.m; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* TableKitAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableKitAppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* TableKitAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableKitAppDelegate.m; sourceTree = "<group>"; };
@@ -90,6 +96,15 @@
 		15144CF4112C535400B44AA5 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				15144DEA112C66A000B44AA5 /* Bound */,
+				15144DE8112C668F00B44AA5 /* One-Shot */,
+			);
+			name = Tests;
+			sourceTree = "<group>";
+		};
+		15144DE8112C668F00B44AA5 /* One-Shot */ = {
+			isa = PBXGroup;
+			children = (
 				15144D05112C556500B44AA5 /* OneShotTablePane.h */,
 				15144D06112C556500B44AA5 /* OneShotTablePane.m */,
 				15144D4D112C5A2000B44AA5 /* OneShotMutableTablePane.h */,
@@ -99,7 +114,18 @@
 				15144DD4112C64F800B44AA5 /* OneShotEditableReloadTablePane.h */,
 				15144DD5112C64F800B44AA5 /* OneShotEditableReloadTablePane.m */,
 			);
-			name = Tests;
+			name = "One-Shot";
+			sourceTree = "<group>";
+		};
+		15144DEA112C66A000B44AA5 /* Bound */ = {
+			isa = PBXGroup;
+			children = (
+				15144DF3112C66E200B44AA5 /* ReloadOnChangeTablePane.h */,
+				15144DF4112C66E200B44AA5 /* ReloadOnChangeTablePane.m */,
+				15144DF6112C670D00B44AA5 /* ValuedObject.h */,
+				15144DF7112C670D00B44AA5 /* ValuedObject.m */,
+			);
+			name = Bound;
 			sourceTree = "<group>";
 		};
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
@@ -212,6 +238,8 @@
 				15144D4F112C5A2000B44AA5 /* OneShotMutableTablePane.m in Sources */,
 				15144D8A112C5CAE00B44AA5 /* OneShotMutableReloadTablePane.m in Sources */,
 				15144DD6112C64F800B44AA5 /* OneShotEditableReloadTablePane.m in Sources */,
+				15144DF5112C66E200B44AA5 /* ReloadOnChangeTablePane.m in Sources */,
+				15144DF8112C670D00B44AA5 /* ValuedObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
