@@ -25,7 +25,10 @@ enum {
 	kILKVOTableBindingOneShotReloadRowsOnReplace,
 	
 	/* -- Constants below are expensive, and
-	 require the whole object graph to be available in memory. --
+	 require the whole object graph to be available in memory. 
+	 (You can avoid that for the above two constants by
+	 implementing KVC accessor methods for the observed
+	 key path.) --
 	 */
 	
 	/* Reload the corresponding rows whenever a model object
