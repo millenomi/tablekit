@@ -14,5 +14,6 @@
 }
 
 - (IBAction) shuffle;
+- (IBAction) add;
 
 @end

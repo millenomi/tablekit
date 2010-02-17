@@ -295,7 +295,7 @@ static void* ILKVOTableDataSource_ModelObjectContext = &ILKVOTableDataSourceUniq
 			[replacedIndexes shiftIndexesStartingAtIndex:i by:(-1)];
 			
 			if (!self.isOneShot)
-				[self removeIndex:i forObject:[newOnes objectAtIndex:j]];
+				[self removeIndex:i forObject:[oldOnes objectAtIndex:j]];
 			
 			i = [indexes indexGreaterThanIndex:i];
 			j++;
@@ -312,7 +312,7 @@ static void* ILKVOTableDataSource_ModelObjectContext = &ILKVOTableDataSourceUniq
 			[replacedIndexes shiftIndexesStartingAtIndex:i by:(1)];
 			
 			if (!self.isOneShot)
-				[self addIndex:i forObject:[oldOnes objectAtIndex:j]];
+				[self addIndex:i forObject:[newOnes objectAtIndex:j]];
 			
 			i = [indexes indexGreaterThanIndex:i];
 			j++;

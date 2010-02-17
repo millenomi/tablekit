@@ -8,6 +8,30 @@
 
 #import "L0Map.h"
 
+static const void* ILRetain(CFAllocatorRef allocator, const void* value) {
+	return [(id)value retain];
+}
+
+static void ILRelease(CFAllocatorRef allocator, const void* value) {
+	[(id)value release];
+}
+
+static CFStringRef ILCopyDescription(const void* value) {
+	NSString* s = [(id)value description];
+	return (CFStringRef) [s copy];
+}
+
+static Boolean ILAreEqualPointers(const void* v1, const void* v2) {
+	return v1 == v2;
+}
+
+static Boolean ILEquals(const void* v1, const void* v2) {
+	return [(id)v1 isEqual:(id)v2];
+}
+
+static CFHashCode ILHash(const void *value) {
+	return (CFHashCode) [(id)value hash];
+}
 
 @implementation L0Map
 
@@ -22,7 +46,24 @@
 
 - (id) init;
 {
-	return [self initWithKeyCallbacks:&kCFTypeDictionaryKeyCallBacks valueCallbacks:&kCFTypeDictionaryValueCallBacks];
+	static const CFDictionaryKeyCallBacks keyCallbacks = {
+		0,
+		&ILRetain,
+		&ILRelease,
+		&ILCopyDescription,
+		&ILAreEqualPointers,
+		&ILHash
+	};
+	
+	static const CFDictionaryValueCallBacks valueCallbacks = {
+		0,
+		&ILRetain,
+		&ILRelease,
+		&ILCopyDescription,
+		&ILEquals
+	};
+	
+	return [self initWithKeyCallbacks:&keyCallbacks valueCallbacks:&valueCallbacks];
 }
 
 - (void) dealloc;

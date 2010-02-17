@@ -32,10 +32,9 @@
 	[self.contents makeObjectsPerformSelector:@selector(updateRandomNumber)];
 }
 
-- (void) dataSource:(ILKVOTableDataSource *)ds willProduceCell:(UITableViewCell *)cell forObject:(id)o atIndex:(NSInteger)i;
+- (IBAction) add;
 {
-	cell.textLabel.opaque = NO;
-	cell.textLabel.backgroundColor = [UIColor clearColor];
+	[self.mutableContents addObject:[[ValuedObject new] autorelease]];
 }
 
 @end
