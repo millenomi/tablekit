@@ -83,6 +83,8 @@ typedef NSInteger ILKVOTableBindingStyle;
 	L0Map* objectsToRows;
 	
 	id <ILKVOTableDataSourceDelegate> delegate;
+	
+	BOOL editable;
 }
 
 - (id) initWithTableView:(UITableView*) tv;
@@ -132,5 +134,14 @@ typedef NSInteger ILKVOTableBindingStyle;
  */
 - (void) beginUpdates;
 - (void) endUpdates;
+
+
+/* If YES, editing will be allowed on all rows. Only deletion
+ is supported, and will cause the object to be removed from
+ the watched key path (which must be mutable).
+ 
+ Default is NO.
+ */
+@property BOOL editable;
 
 @end

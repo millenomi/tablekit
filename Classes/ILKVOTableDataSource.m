@@ -48,6 +48,7 @@ static void* ILKVOTableDataSource_ModelObjectContext = &ILKVOTableDataSourceUniq
 @synthesize boundObject, keyPath, cellClass, bindings;
 @synthesize insertionAnimation, deletionAnimation;
 @synthesize bindingStyle;
+@synthesize editable;
 
 - (void) dealloc;
 {
@@ -421,6 +422,20 @@ static void* ILKVOTableDataSource_ModelObjectContext = &ILKVOTableDataSourceUniq
 		[addedIndexes release];
 		[removedIndexes release];
 		[replacedIndexes release];
+	}
+}
+
+#pragma mark Editing
+
+- (BOOL) tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath;
+{
+	return editable;
+}
+
+- (void) tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath;
+{
+	if (editingStyle == UITableViewCellEditingStyleDelete) {
+		[[boundObject mutableArrayValueForKey:keyPath] removeObjectAtIndex:[indexPath row]];
 	}
 }
 
