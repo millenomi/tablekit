@@ -13,17 +13,34 @@
 
 - (id) init
 {
+	static unsigned char nameChar = 'A';
+	
 	self = [super init];
 	if (self != nil) {
+		label = [[NSString alloc] initWithFormat:@"%c", nameChar];
+		nameChar++;
+		
 		[self updateRandomNumber];
 	}
 	return self;
 }
 
+- (void) dealloc
+{
+	[label release];
+	[super dealloc];
+}
+
+- (NSString*) description;
+{
+	return [NSString stringWithFormat:@"%@ { label = %@ }", [super description], label];
+}
+
+
 @synthesize randomNumber;
 - (NSString*) randomNumberString;
 {
-	return [NSString stringWithFormat:@"%ld", (long) randomNumber];
+	return [NSString stringWithFormat:@"(%@) %ld", label, (long) randomNumber];
 }
 - (NSSet*) keyPathsForValuesAffectingRandomNumberString;
 {

@@ -11,6 +11,7 @@
 
 @interface ValuedObject : NSObject {
 	long randomNumber;
+	NSString* label;
 }
 
 @property(readonly) long randomNumber;

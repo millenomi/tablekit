@@ -17,12 +17,10 @@ static void* ILKVOTableDataSource_ModelObjectContext = &ILKVOTableDataSourceUniq
 @interface ILKVOTableDataSource ()
 - (void) beginObserving;
 - (void) endObserving;
-- (void) beginObservingKeyPathContentsAtIndexes:(NSIndexSet *)is;
-- (void) endObservingKeyPathContentsAtIndexes:(NSIndexSet *)is;
+- (void) beginObservingKeyPathContentsObject:(id) o;
+- (void) endObservingKeyPathContentsObject:(id) o;
 
 - (NSIndexSet*) indexSetForObject:(id) o;
-- (void) addIndex:(NSInteger) row forObject:(id) o;
-- (void) removeIndex:(NSInteger) row forObject:(id) o;
 
 - (void) handleCollectionChange:(NSKeyValueChange) c atIndexes:(NSIndexSet*) indexes newObjects:(NSArray*) newOnes oldObjects:(NSArray*) oldOnes;
 
@@ -42,7 +40,6 @@ static void* ILKVOTableDataSource_ModelObjectContext = &ILKVOTableDataSourceUniq
 	tableView = [tv retain];
 	cellClass = [UITableViewCell class];
 	[self setAnimation:UITableViewRowAnimationFade];
-	objectsToRows = [L0Map new];
 	return self;
 }
 
@@ -64,8 +61,6 @@ static void* ILKVOTableDataSource_ModelObjectContext = &ILKVOTableDataSourceUniq
 	[addedIndexes release];
 	[removedIndexes release];
 	[replacedIndexes release];
-	
-	[objectsToRows release];
 	
 	[tableView release];
 	
@@ -126,9 +121,7 @@ static void* ILKVOTableDataSource_ModelObjectContext = &ILKVOTableDataSourceUniq
 #pragma mark KVO tools
 
 - (void) beginObserving;
-{
-	[objectsToRows removeAllObjects];
-	
+{	
 	if (self.boundObject && self.keyPath) {
 		NSKeyValueObservingOptions styleOptions = 0;
 		if (!self.isOneShot)
@@ -137,16 +130,12 @@ static void* ILKVOTableDataSource_ModelObjectContext = &ILKVOTableDataSourceUniq
 		[self.boundObject addObserver:self forKeyPath:self.keyPath options:NSKeyValueObservingOptionInitial|styleOptions context:ILKVOTableDataSource_BoundObjectContext];
 	}
 	
-	if (!self.isOneShot) {
+	if (!self.isOneShot) {		
 		NSMutableArray* a = [self.boundObject mutableArrayValueForKey:self.keyPath];
-		
-		for (NSString* key in self.bindings) {
-			[a addObserver:self toObjectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, [a count])] forKeyPath:[self.bindings objectForKey:key] options:0 context:ILKVOTableDataSource_ModelObjectContext];
-		}
-		
+				
 		NSInteger i = 0;
 		for (id o in a) {
-			[self addIndex:i forObject:o];
+			[self beginObservingKeyPathContentsObject:o];
 			i++;
 		}
 	}
@@ -161,16 +150,13 @@ static void* ILKVOTableDataSource_ModelObjectContext = &ILKVOTableDataSourceUniq
 }
 
 - (void) endObserving;
-{
-	[objectsToRows removeAllObjects];
-	
+{	
 	if (self.boundObject && self.keyPath) {
 		NSMutableArray* a = [self.boundObject mutableArrayValueForKey:self.keyPath];
 		
 		if (!self.isOneShot) {
-			for (NSString* key in self.bindings) {
+			for (NSString* key in self.bindings)
 				[a removeObserver:self fromObjectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, [a count])] forKeyPath:[self.bindings objectForKey:key]];
-			}
 		}
 		 
 		[self.boundObject removeObserver:self forKeyPath:self.keyPath];
@@ -236,41 +222,32 @@ static void* ILKVOTableDataSource_ModelObjectContext = &ILKVOTableDataSourceUniq
 
 - (NSIndexSet*) indexSetForObject:(id) o;
 {
-	return [objectsToRows objectForKey:o];
-}
-
-- (void) addIndex:(NSInteger) row forObject:(id) o;
-{
-	NSMutableIndexSet* is = [objectsToRows objectForKey:o];
-	if (!is) {
-		is = [NSMutableIndexSet indexSet];
-		[objectsToRows setObject:is forKey:o];
+	NSInteger i = 0;
+	for (id w in [self.boundObject mutableArrayValueForKey:self.keyPath]) {
+		if (w == o)
+			return [NSIndexSet indexSetWithIndex:i];
+		i++;
 	}
 	
-	[is addIndex:row];
+	return [NSIndexSet indexSet];
 }
 
-- (void) removeIndex:(NSInteger) row forObject:(id) o;
+- (void) beginObservingKeyPathContentsObject:(id) o;
 {
-	NSMutableIndexSet* is = [objectsToRows objectForKey:o];
-	[is removeIndex:row];
+	if (self.isOneShot)
+		return;
+
+	for (NSString* key in self.bindings)
+		[o addObserver:self forKeyPath:[self.bindings objectForKey:key] options:0 context:ILKVOTableDataSource_ModelObjectContext];
+}
+
+- (void) endObservingKeyPathContentsObject:(id) o;
+{
+	if (self.isOneShot)
+		return;
 	
-	if (is && [is count] == 0)
-		[objectsToRows removeObjectForKey:o];
-}
-
-- (void) beginObservingKeyPathContentsAtIndexes:(NSIndexSet*) is;
-{
-	NSMutableArray* a = [self.boundObject mutableArrayValueForKey:self.keyPath];
 	for (NSString* key in self.bindings)
-		[a addObserver:self toObjectsAtIndexes:is forKeyPath:[self.bindings objectForKey:key] options:0 context:ILKVOTableDataSource_ModelObjectContext];
-}
-
-- (void) endObservingKeyPathContentsAtIndexes:(NSIndexSet*) is;
-{
-	NSMutableArray* a = [self.boundObject mutableArrayValueForKey:self.keyPath];
-	for (NSString* key in self.bindings)
-		[a removeObserver:self fromObjectsAtIndexes:is forKeyPath:[self.bindings objectForKey:key]];
+		[o removeObserver:self forKeyPath:[self.bindings objectForKey:key]];
 }
 
 - (void) handleCollectionChange:(NSKeyValueChange) c atIndexes:(NSIndexSet*) indexes newObjects:(NSArray*) newOnes oldObjects:(NSArray*) oldOnes;
@@ -287,21 +264,17 @@ static void* ILKVOTableDataSource_ModelObjectContext = &ILKVOTableDataSourceUniq
 		[replacedIndexes addIndexes:indexes];
 		
 		if (!self.isOneShot) {
-			[self endObservingKeyPathContentsAtIndexes:indexes];
-
 			NSInteger i = [indexes firstIndex], count = [indexes count], j;
 			for (j = 0; j < count; j++) {
 				
 				id n = [newOnes objectAtIndex:j];
 				id o = [oldOnes objectAtIndex:j];
-				
-				[self addIndex:i forObject:n];
-				[self removeIndex:i forObject:o];
-				
+								
 				i = [indexes indexGreaterThanIndex:i];
+
+				[self endObservingKeyPathContentsObject:o];
+				[self beginObservingKeyPathContentsObject:n];
 			}
-			
-			[self beginObservingKeyPathContentsAtIndexes:indexes];
 		}
 		
 		[self endUpdates];		
@@ -310,15 +283,15 @@ static void* ILKVOTableDataSource_ModelObjectContext = &ILKVOTableDataSourceUniq
 		
 		NSInteger i = [indexes firstIndex], j = 0;
 		
-		[self endObservingKeyPathContentsAtIndexes:indexes];
+		if (!self.isOneShot) {
+			for (id o in oldOnes)
+				[self endObservingKeyPathContentsObject:o];
+		}
 		
 		while (i != NSNotFound) {
 			[removedIndexes addIndex:i];
 			[addedIndexes shiftIndexesStartingAtIndex:i by:(-1)];
 			[replacedIndexes shiftIndexesStartingAtIndex:i by:(-1)];
-			
-			if (!self.isOneShot)
-				[self removeIndex:i forObject:[oldOnes objectAtIndex:j]];
 			
 			i = [indexes indexGreaterThanIndex:i];
 			j++;
@@ -334,14 +307,14 @@ static void* ILKVOTableDataSource_ModelObjectContext = &ILKVOTableDataSourceUniq
 			[addedIndexes addIndex:i];
 			[replacedIndexes shiftIndexesStartingAtIndex:i by:(1)];
 			
-			if (!self.isOneShot)
-				[self addIndex:i forObject:[newOnes objectAtIndex:j]];
-			
 			i = [indexes indexGreaterThanIndex:i];
 			j++;
 		}
 		
-		[self beginObservingKeyPathContentsAtIndexes:indexes];
+		if (!self.isOneShot) {
+			for (id n in newOnes)
+				[self beginObservingKeyPathContentsObject:n];
+		}
 		
 		[self endUpdates];
 	}

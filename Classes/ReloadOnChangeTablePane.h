@@ -16,4 +16,6 @@
 - (IBAction) shuffle;
 - (IBAction) add;
 
+- (IBAction) pickActionFromSegmentedControl:(UISegmentedControl*) ctl;
+
 @end

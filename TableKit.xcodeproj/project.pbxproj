@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		15144CED112C532600B44AA5 /* L0Map.m in Sources */ = {isa = PBXBuildFile; fileRef = 15144CEA112C532600B44AA5 /* L0Map.m */; };
 		15144CEE112C532600B44AA5 /* ILKVOTableDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 15144CEC112C532600B44AA5 /* ILKVOTableDataSource.m */; };
 		15144CFA112C539300B44AA5 /* ILKVOTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15144CF9112C539300B44AA5 /* ILKVOTableController.m */; };
 		15144D07112C556500B44AA5 /* OneShotTablePane.m in Sources */ = {isa = PBXBuildFile; fileRef = 15144D06112C556500B44AA5 /* OneShotTablePane.m */; };
@@ -25,8 +24,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		15144CE9112C532600B44AA5 /* L0Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0Map.h; sourceTree = "<group>"; };
-		15144CEA112C532600B44AA5 /* L0Map.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0Map.m; sourceTree = "<group>"; };
 		15144CEB112C532600B44AA5 /* ILKVOTableDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ILKVOTableDataSource.h; sourceTree = "<group>"; };
 		15144CEC112C532600B44AA5 /* ILKVOTableDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ILKVOTableDataSource.m; sourceTree = "<group>"; };
 		15144CF8112C539300B44AA5 /* ILKVOTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ILKVOTableController.h; sourceTree = "<group>"; };
@@ -83,8 +80,6 @@
 		15144CE8112C532600B44AA5 /* KVO Data Source */ = {
 			isa = PBXGroup;
 			children = (
-				15144CE9112C532600B44AA5 /* L0Map.h */,
-				15144CEA112C532600B44AA5 /* L0Map.m */,
 				15144CEB112C532600B44AA5 /* ILKVOTableDataSource.h */,
 				15144CEC112C532600B44AA5 /* ILKVOTableDataSource.m */,
 				15144CF8112C539300B44AA5 /* ILKVOTableController.h */,
@@ -231,7 +226,6 @@
 			files = (
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* TableKitAppDelegate.m in Sources */,
-				15144CED112C532600B44AA5 /* L0Map.m in Sources */,
 				15144CEE112C532600B44AA5 /* ILKVOTableDataSource.m in Sources */,
 				15144CFA112C539300B44AA5 /* ILKVOTableController.m in Sources */,
 				15144D07112C556500B44AA5 /* OneShotTablePane.m in Sources */,

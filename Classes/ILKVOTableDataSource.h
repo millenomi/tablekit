@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "L0Map.h"
 
 enum {
 	/* Use the bindings in .bindings only at cell creation time.
@@ -79,8 +78,6 @@ typedef NSInteger ILKVOTableBindingStyle;
 	NSMutableIndexSet* addedIndexes, * removedIndexes, * replacedIndexes;
 	
 	ILKVOTableBindingStyle bindingStyle;
-	
-	L0Map* objectsToRows;
 	
 	id <ILKVOTableDataSourceDelegate> delegate;
 	
