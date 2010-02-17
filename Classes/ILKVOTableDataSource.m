@@ -17,6 +17,8 @@ static void* ILKVOTableDataSource_ModelObjectContext = &ILKVOTableDataSourceUniq
 @interface ILKVOTableDataSource ()
 - (void) beginObserving;
 - (void) endObserving;
+- (void) beginObservingKeyPathContentsAtIndexes:(NSIndexSet *)is;
+- (void) endObservingKeyPathContentsAtIndexes:(NSIndexSet *)is;
 
 - (NSIndexSet*) indexSetForObject:(id) o;
 - (void) addIndex:(NSInteger) row forObject:(id) o;
@@ -257,6 +259,20 @@ static void* ILKVOTableDataSource_ModelObjectContext = &ILKVOTableDataSourceUniq
 		[objectsToRows removeObjectForKey:o];
 }
 
+- (void) beginObservingKeyPathContentsAtIndexes:(NSIndexSet*) is;
+{
+	NSMutableArray* a = [self.boundObject mutableArrayValueForKey:self.keyPath];
+	for (NSString* key in self.bindings)
+		[a addObserver:self toObjectsAtIndexes:is forKeyPath:[self.bindings objectForKey:key] options:0 context:ILKVOTableDataSource_ModelObjectContext];
+}
+
+- (void) endObservingKeyPathContentsAtIndexes:(NSIndexSet*) is;
+{
+	NSMutableArray* a = [self.boundObject mutableArrayValueForKey:self.keyPath];
+	for (NSString* key in self.bindings)
+		[a removeObserver:self fromObjectsAtIndexes:is forKeyPath:[self.bindings objectForKey:key]];
+}
+
 - (void) handleCollectionChange:(NSKeyValueChange) c atIndexes:(NSIndexSet*) indexes newObjects:(NSArray*) newOnes oldObjects:(NSArray*) oldOnes;
 {	
 	if (c == NSKeyValueChangeSetting) {
@@ -271,8 +287,11 @@ static void* ILKVOTableDataSource_ModelObjectContext = &ILKVOTableDataSourceUniq
 		[replacedIndexes addIndexes:indexes];
 		
 		if (!self.isOneShot) {
+			[self endObservingKeyPathContentsAtIndexes:indexes];
+
 			NSInteger i = [indexes firstIndex], count = [indexes count], j;
 			for (j = 0; j < count; j++) {
+				
 				id n = [newOnes objectAtIndex:j];
 				id o = [oldOnes objectAtIndex:j];
 				
@@ -281,6 +300,8 @@ static void* ILKVOTableDataSource_ModelObjectContext = &ILKVOTableDataSourceUniq
 				
 				i = [indexes indexGreaterThanIndex:i];
 			}
+			
+			[self beginObservingKeyPathContentsAtIndexes:indexes];
 		}
 		
 		[self endUpdates];		
@@ -288,6 +309,8 @@ static void* ILKVOTableDataSource_ModelObjectContext = &ILKVOTableDataSourceUniq
 		[self beginUpdates];
 		
 		NSInteger i = [indexes firstIndex], j = 0;
+		
+		[self endObservingKeyPathContentsAtIndexes:indexes];
 		
 		while (i != NSNotFound) {
 			[removedIndexes addIndex:i];
@@ -317,6 +340,8 @@ static void* ILKVOTableDataSource_ModelObjectContext = &ILKVOTableDataSourceUniq
 			i = [indexes indexGreaterThanIndex:i];
 			j++;
 		}
+		
+		[self beginObservingKeyPathContentsAtIndexes:indexes];
 		
 		[self endUpdates];
 	}

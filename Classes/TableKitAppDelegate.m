@@ -20,6 +20,13 @@
 	return YES;
 }
 
+- (void) applicationWillTerminate:(UIApplication *)application;
+{
+	[mainViewController.view removeFromSuperview];
+	[mainViewController release];
+	mainViewController = nil;
+}
+
 
 - (void) dealloc;
 {
