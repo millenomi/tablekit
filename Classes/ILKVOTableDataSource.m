@@ -210,7 +210,7 @@ static void* ILKVOTableDataSource_ModelObjectContext = &ILKVOTableDataSourceUniq
 					for (NSString* cellKey in self.bindings) {
 						if ([[self.bindings objectForKey:cellKey] isEqual:objectKeyPath]) {
 							for (id cell in cells)
-								[cell setValue:value forKey:cellKey];
+								[cell setValue:value forKeyPath:cellKey];
 						}
 					}
 				}

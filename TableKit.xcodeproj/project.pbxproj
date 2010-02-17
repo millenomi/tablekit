@@ -15,6 +15,7 @@
 		15144DD6112C64F800B44AA5 /* OneShotEditableReloadTablePane.m in Sources */ = {isa = PBXBuildFile; fileRef = 15144DD5112C64F800B44AA5 /* OneShotEditableReloadTablePane.m */; };
 		15144DF5112C66E200B44AA5 /* ReloadOnChangeTablePane.m in Sources */ = {isa = PBXBuildFile; fileRef = 15144DF4112C66E200B44AA5 /* ReloadOnChangeTablePane.m */; };
 		15144DF8112C670D00B44AA5 /* ValuedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 15144DF7112C670D00B44AA5 /* ValuedObject.m */; };
+		15144F41112C92A300B44AA5 /* ReapplyOnChangeTablePane.m in Sources */ = {isa = PBXBuildFile; fileRef = 15144F40112C92A300B44AA5 /* ReapplyOnChangeTablePane.m */; };
 		1D3623260D0F684500981E51 /* TableKitAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* TableKitAppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
@@ -40,6 +41,8 @@
 		15144DF4112C66E200B44AA5 /* ReloadOnChangeTablePane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReloadOnChangeTablePane.m; sourceTree = "<group>"; };
 		15144DF6112C670D00B44AA5 /* ValuedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValuedObject.h; sourceTree = "<group>"; };
 		15144DF7112C670D00B44AA5 /* ValuedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ValuedObject.m; sourceTree = "<group>"; };
+		15144F3F112C92A300B44AA5 /* ReapplyOnChangeTablePane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReapplyOnChangeTablePane.h; sourceTree = "<group>"; };
+		15144F40112C92A300B44AA5 /* ReapplyOnChangeTablePane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReapplyOnChangeTablePane.m; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* TableKitAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableKitAppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* TableKitAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableKitAppDelegate.m; sourceTree = "<group>"; };
@@ -119,6 +122,8 @@
 				15144DF4112C66E200B44AA5 /* ReloadOnChangeTablePane.m */,
 				15144DF6112C670D00B44AA5 /* ValuedObject.h */,
 				15144DF7112C670D00B44AA5 /* ValuedObject.m */,
+				15144F3F112C92A300B44AA5 /* ReapplyOnChangeTablePane.h */,
+				15144F40112C92A300B44AA5 /* ReapplyOnChangeTablePane.m */,
 			);
 			name = Bound;
 			sourceTree = "<group>";
@@ -234,6 +239,7 @@
 				15144DD6112C64F800B44AA5 /* OneShotEditableReloadTablePane.m in Sources */,
 				15144DF5112C66E200B44AA5 /* ReloadOnChangeTablePane.m in Sources */,
 				15144DF8112C670D00B44AA5 /* ValuedObject.m in Sources */,
+				15144F41112C92A300B44AA5 /* ReapplyOnChangeTablePane.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
