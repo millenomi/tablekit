@@ -1,0 +1,6 @@
+.DS_Store
+build
+*.mode2v3
+*.perspective2v3
+*.pbxuser
+.LSOverride
