@@ -3,7 +3,7 @@
 //  Tables
 //
 //  Created by ∞ on 15/02/10.
-//  Copyright 2010 Apple Inc. All rights reserved.
+//  Copyright 2010 Emanuele Vulcano (Infinite Labs) All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

@@ -3,7 +3,7 @@
 //  TableKit
 //
 //  Created by ∞ on 17/02/10.
-//  Copyright Apple Inc 2010. All rights reserved.
+//  Copyright Emanuele Vulcano (Infinite Labs)2010. All rights reserved.
 //
 
 #import "TableKitAppDelegate.h"
