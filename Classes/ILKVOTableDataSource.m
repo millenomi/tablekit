@@ -13,8 +13,11 @@ static int ILKVOTableDataSourceUniqueVarA = 0, ILKVOTableDataSourceUniqueVarB = 
 static void* ILKVOTableDataSource_BoundObjectContext = &ILKVOTableDataSourceUniqueVarA;
 static void* ILKVOTableDataSource_ModelObjectContext = &ILKVOTableDataSourceUniqueVarB;
 
+#define kILTableViewDataSourceDefaultReuseIdentifier @"cell"
 
 @interface ILKVOTableDataSource ()
+@property(copy) NSString* reuseIdentifier;
+
 - (void) beginObserving;
 - (void) endObserving;
 - (void) beginObservingKeyPathContentsObject:(id) o;
@@ -39,6 +42,8 @@ static void* ILKVOTableDataSource_ModelObjectContext = &ILKVOTableDataSourceUniq
 	
 	tableView = [tv retain];
 	cellClass = [UITableViewCell class];
+	nibBundle = [[NSBundle mainBundle] retain];
+	reuseIdentifier = [kILTableViewDataSourceDefaultReuseIdentifier copy];
 	[self setAnimation:UITableViewRowAnimationFade];
 	return self;
 }
@@ -48,6 +53,7 @@ static void* ILKVOTableDataSource_ModelObjectContext = &ILKVOTableDataSourceUniq
 @synthesize insertionAnimation, deletionAnimation;
 @synthesize bindingStyle;
 @synthesize editable;
+@synthesize nibName, nibBundle, reuseIdentifier;
 
 - (void) dealloc;
 {
@@ -63,6 +69,10 @@ static void* ILKVOTableDataSource_ModelObjectContext = &ILKVOTableDataSourceUniq
 	[replacedIndexes release];
 	
 	[tableView release];
+	
+	[nibName release];
+	[nibBundle release];
+	[reuseIdentifier release];
 	
 	[super dealloc];
 }
@@ -338,11 +348,27 @@ static void* ILKVOTableDataSource_ModelObjectContext = &ILKVOTableDataSourceUniq
 
 - (UITableViewCell *) tableView:(UITableView *)tv cellForRowAtIndexPath:(NSIndexPath *)indexPath;
 {
-#define kILTableViewDataSourceReuseIdentifier @"cell"
+	UITableViewCell* cell = nil;
 	
-	UITableViewCell* cell = [tv dequeueReusableCellWithIdentifier:kILTableViewDataSourceReuseIdentifier];
-	if (!cell)
-		cell = [[[self.cellClass alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kILTableViewDataSourceReuseIdentifier] autorelease];
+	if (self.reuseIdentifier)
+		[tv dequeueReusableCellWithIdentifier:self.reuseIdentifier];
+	
+	if (!cell) {
+		if (self.nibName && self.nibBundle) {
+			for (id o in [self.nibBundle loadNibNamed:self.nibName owner:nil options:[NSDictionary dictionary]]) {
+				if ([o isKindOfClass:[UITableViewCell class]]) {
+					cell = o;
+					if (cell.reuseIdentifier)
+						self.reuseIdentifier = cell.reuseIdentifier;
+					
+					break;
+				}
+			}
+		} else 
+			cell = [[[self.cellClass alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier] autorelease];
+	}
+	
+	NSAssert(cell, @"The cell should have been dequeued, loaded from the NIB or instantiated from the class, and we have neither");
 	
 	id object = nil;
 	

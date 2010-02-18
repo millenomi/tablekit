@@ -82,6 +82,10 @@ typedef NSInteger ILKVOTableBindingStyle;
 	id <ILKVOTableDataSourceDelegate> delegate;
 	
 	BOOL editable;
+	
+	NSString* nibName;
+	NSBundle* nibBundle;
+	NSString* reuseIdentifier;
 }
 
 - (id) initWithTableView:(UITableView*) tv;
@@ -95,6 +99,14 @@ typedef NSInteger ILKVOTableBindingStyle;
 
 // Default is UITableViewCell.
 @property(assign) Class cellClass;
+
+/* Defaults to nil. If non-nil, will load this nib instead
+ of instantiating the cell class above, then use the
+ first subclass-of-UITableViewCell object it finds from
+ the nib's toplevel objects. (File's Owner is undefined.)
+ */
+@property(copy) NSString* nibName;
+@property(retain) NSBundle* nibBundle; // defaults to the main bundle
 
 /*
  Each entry of the dictionary maps a key path of the cell
