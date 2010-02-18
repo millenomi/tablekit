@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Sections</key>
+	<array>
+		<array>
+			<dict>
+				<key>textLabel.text</key>
+				<string>Dinner</string>
+				<key>detailTextLabel.text</key>
+				<string>Ready</string>
+				<key>style</key>
+				<integer>1</integer>
+			</dict>
+			<dict>
+				<key>textLabel.text</key>
+				<string>A</string>
+			</dict>
+			<dict>
+				<key>textLabel.text</key>
+				<string>B</string>
+			</dict>
+		</array>
+		<array>
+			<dict>
+				<key>textLabel.text</key>
+				<string>The Love Machine</string>
+				<key>detailTextLabel.text</key>
+				<string>Albatross of Love · by The Unsteady</string>
+				<key>style</key>
+				<integer>3</integer>
+			</dict>
+			<dict>
+				<key>textLabel.text</key>
+				<string>XYZ</string>
+				<key>actionName</key>
+				<string>log</string>
+				<key>accessoryType</key>
+				<integer>1</integer>
+			</dict>
+		</array>
+	</array>
+</dict>
+</plist>

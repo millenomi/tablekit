@@ -16,6 +16,10 @@
 		15144DF5112C66E200B44AA5 /* ReloadOnChangeTablePane.m in Sources */ = {isa = PBXBuildFile; fileRef = 15144DF4112C66E200B44AA5 /* ReloadOnChangeTablePane.m */; };
 		15144DF8112C670D00B44AA5 /* ValuedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 15144DF7112C670D00B44AA5 /* ValuedObject.m */; };
 		15144F41112C92A300B44AA5 /* ReapplyOnChangeTablePane.m in Sources */ = {isa = PBXBuildFile; fileRef = 15144F40112C92A300B44AA5 /* ReapplyOnChangeTablePane.m */; };
+		15144F69112D431100B44AA5 /* ILStaticTableDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 15144F68112D431100B44AA5 /* ILStaticTableDataSource.m */; };
+		15144F89112D4DDD00B44AA5 /* ILStaticTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15144F88112D4DDD00B44AA5 /* ILStaticTableController.m */; };
+		15144FA4112D4FD500B44AA5 /* StaticTablePane.m in Sources */ = {isa = PBXBuildFile; fileRef = 15144FA3112D4FD500B44AA5 /* StaticTablePane.m */; };
+		15144FC6112D519700B44AA5 /* Static.table in Resources */ = {isa = PBXBuildFile; fileRef = 15144FA5112D4FF800B44AA5 /* Static.table */; };
 		1D3623260D0F684500981E51 /* TableKitAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* TableKitAppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
@@ -43,6 +47,13 @@
 		15144DF7112C670D00B44AA5 /* ValuedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ValuedObject.m; sourceTree = "<group>"; };
 		15144F3F112C92A300B44AA5 /* ReapplyOnChangeTablePane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReapplyOnChangeTablePane.h; sourceTree = "<group>"; };
 		15144F40112C92A300B44AA5 /* ReapplyOnChangeTablePane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReapplyOnChangeTablePane.m; sourceTree = "<group>"; };
+		15144F67112D431100B44AA5 /* ILStaticTableDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ILStaticTableDataSource.h; sourceTree = "<group>"; };
+		15144F68112D431100B44AA5 /* ILStaticTableDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ILStaticTableDataSource.m; sourceTree = "<group>"; };
+		15144F87112D4DDD00B44AA5 /* ILStaticTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ILStaticTableController.h; sourceTree = "<group>"; };
+		15144F88112D4DDD00B44AA5 /* ILStaticTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ILStaticTableController.m; sourceTree = "<group>"; };
+		15144FA2112D4FD500B44AA5 /* StaticTablePane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaticTablePane.h; sourceTree = "<group>"; };
+		15144FA3112D4FD500B44AA5 /* StaticTablePane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaticTablePane.m; sourceTree = "<group>"; };
+		15144FA5112D4FF800B44AA5 /* Static.table */ = {isa = PBXFileReference; explicitFileType = text.plist.xml; fileEncoding = 4; path = Static.table; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* TableKitAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableKitAppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* TableKitAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableKitAppDelegate.m; sourceTree = "<group>"; };
@@ -72,6 +83,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				15144F66112D42FE00B44AA5 /* Static Data Source */,
 				15144CF4112C535400B44AA5 /* Tests */,
 				15144CE8112C532600B44AA5 /* KVO Data Source */,
 				1D3623240D0F684500981E51 /* TableKitAppDelegate.h */,
@@ -94,6 +106,7 @@
 		15144CF4112C535400B44AA5 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				15144FA1112D4FD000B44AA5 /* Static */,
 				15144DEA112C66A000B44AA5 /* Bound */,
 				15144DE8112C668F00B44AA5 /* One-Shot */,
 			);
@@ -126,6 +139,27 @@
 				15144F40112C92A300B44AA5 /* ReapplyOnChangeTablePane.m */,
 			);
 			name = Bound;
+			sourceTree = "<group>";
+		};
+		15144F66112D42FE00B44AA5 /* Static Data Source */ = {
+			isa = PBXGroup;
+			children = (
+				15144F67112D431100B44AA5 /* ILStaticTableDataSource.h */,
+				15144F68112D431100B44AA5 /* ILStaticTableDataSource.m */,
+				15144F87112D4DDD00B44AA5 /* ILStaticTableController.h */,
+				15144F88112D4DDD00B44AA5 /* ILStaticTableController.m */,
+			);
+			name = "Static Data Source";
+			sourceTree = "<group>";
+		};
+		15144FA1112D4FD000B44AA5 /* Static */ = {
+			isa = PBXGroup;
+			children = (
+				15144FA2112D4FD500B44AA5 /* StaticTablePane.h */,
+				15144FA3112D4FD500B44AA5 /* StaticTablePane.m */,
+				15144FA5112D4FF800B44AA5 /* Static.table */,
+			);
+			name = Static;
 			sourceTree = "<group>";
 		};
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
@@ -219,6 +253,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
+				15144FC6112D519700B44AA5 /* Static.table in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,6 +275,9 @@
 				15144DF5112C66E200B44AA5 /* ReloadOnChangeTablePane.m in Sources */,
 				15144DF8112C670D00B44AA5 /* ValuedObject.m in Sources */,
 				15144F41112C92A300B44AA5 /* ReapplyOnChangeTablePane.m in Sources */,
+				15144F69112D431100B44AA5 /* ILStaticTableDataSource.m in Sources */,
+				15144F89112D4DDD00B44AA5 /* ILStaticTableController.m in Sources */,
+				15144FA4112D4FD500B44AA5 /* StaticTablePane.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
