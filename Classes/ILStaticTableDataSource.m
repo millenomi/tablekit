@@ -65,10 +65,10 @@
 		[content addObject:cells];
 	}
 	
-	return [self initWithContent:content target:t];
+	return [self initWithContent:content keyedCells:keyeds target:t];
 }
 
-- (id) initWithContent:(NSArray*) s keyedCells:(NSDictionary*) keyedCells target:(id) t;
+- (id) initWithContent:(NSArray*) s keyedCells:(NSDictionary*) k target:(id) t;
 {
 	if (self = [super init]) {
 		NSMutableArray* a = [NSMutableArray arrayWithCapacity:[s count]];
@@ -76,7 +76,7 @@
 			[a addObject:[[section copy] autorelease]];
 		
 		sections = [a copy];
-		keyedCells = [keyedCells copy];
+		keyedCells = [k copy];
 		
 		target = t;
 	}
@@ -98,12 +98,18 @@
 	return [self initWithTableDescription:d target:t];
 }
 
-@synthesize sections, target;
+@synthesize sections, target, keyedCells;
 
 - (void) dealloc
 {
+	[keyedCells release];
 	[sections release];
 	[super dealloc];
+}
+
+- (id) cellForKey:(NSString *)name;
+{
+	return [keyedCells objectForKey:name];
 }
 
 // ~ ~ ~
